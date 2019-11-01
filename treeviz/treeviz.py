@@ -57,8 +57,8 @@ class Node(object):
 			version = 1
 
 			while os.path.exists(path_to_file):
-				filename = "{}_{}.{}".format(filename.rsplit(".", 1)[0], version, filename.rsplit(".", 1)[1])
-				path_to_file = "{}/{}".format(path,filename)
+				new_filename = "{}_{}.{}".format(filename.rsplit(".", 1)[0], version, filename.rsplit(".", 1)[1])
+				path_to_file = "{}/{}".format(path,new_filename)
 				version += 1
 			with open(path_to_file, 'w', encoding="utf-8") as f:
 				for buf in buff:
