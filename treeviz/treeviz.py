@@ -24,28 +24,34 @@ class Node(object):
 		return "{prefix}{value}".format(prefix=prefix, value=value)
 
 
-	def __dfs(self, descendants, buff, level, prefix):
+	def __dfs(self, descendants, buff, level, prefix, max_len):
 		# if descendants is empty, nothing will be excuted
 		for idx, descendant in enumerate(descendants):
 			cur_prefix = prefix[:]
 			if idx != len(descendants)-1:
-				cur_prefix.append("├── ")
-				buff.append(self.__visualize_child(descendant.value, "".join(cur_prefix)))
-				cur_prefix.pop()
+				end = len(descendant.value) // max_len + 1
+				for i in range(0, end):
+					if i==0:
+						buff.append(self.__visualize_child(descendant.value[i*max_len:(i+1)*max_len], "".join(cur_prefix + ["├── "])))
+					else:
+						buff.append(self.__visualize_child(descendant.value[i*max_len:(i+1)*max_len], "".join(cur_prefix + ["│   "])))
 				cur_prefix.append("│   ")
 			else:
-				cur_prefix.append("└── ")
-				buff.append(self.__visualize_child(descendant.value, "".join(cur_prefix)))
-				cur_prefix.pop()
+				end = len(descendant.value) // max_len + 1
+				for i in range(0, end):
+					if i==0:
+						buff.append(self.__visualize_child(descendant.value[i*max_len:(i+1)*max_len], "".join(cur_prefix + ["└── "])))
+					else:
+						buff.append(self.__visualize_child(descendant.value[i*max_len:(i+1)*max_len], "".join(cur_prefix + ["    "])))
 				cur_prefix.append("    ")
-			self.__dfs(descendant.children, buff, level+1, cur_prefix)
+			self.__dfs(descendant.children, buff, level+1, cur_prefix, max_len)
 
-	def visualize(self, path=None):
+	def visualize(self, path=None, max_len=10):
 		# visualize sub-tree
 		# buffer
 		buff = []
 		buff.append("{}".format(self.value))
-		self.__dfs(self.children, buff, 0, [])
+		self.__dfs(self.children, buff, 0, [], max_len)
 
 		if not path or not os.path.exists(path):
 			# Print to terminal
