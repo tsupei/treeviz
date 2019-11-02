@@ -119,7 +119,7 @@ root.visualize(max_len=10)
 ```bash
 Jason is our grandfather
 ├── Mary is Ke
-│   vin's moth
+│   vin\'s moth
 │   er
 │   ├── Kevin
 │   │   └── Baby
@@ -132,6 +132,9 @@ Jason is our grandfather
     └── Momo
 ```
 (*2019.11.2*) Adding `line_space` parameter to `visualize()`, which enables to set space between each branch
+```python
+root.visualize(line_space=2)
+```
 ```bash
 Jason is our grandfather
 ├── Mary is Kevin's mother

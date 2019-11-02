@@ -16,6 +16,6 @@ child2.add_child(grandson3)
 child2.add_child(grandson4)
 grandson1.add_child(grandgrandson1)
 
-root.visualize()
 root.visualize(max_len=10)
 root.visualize(line_space=2)
+

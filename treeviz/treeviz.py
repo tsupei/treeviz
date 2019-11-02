@@ -17,7 +17,15 @@ class Node(object):
 	def add_child(self, child):
 		if type(child) != Node:
 			return None
+		# child cannot be any ancestor
+		cur = self
+		while cur:
+			if cur == child:
+				raise ValueError("child should not be any of the ancestor")
+			cur = cur.parent
+		child.parent = self
 		self.children.append(child)
+
 		return child
 
 	def __pack(self, value, prefix):
