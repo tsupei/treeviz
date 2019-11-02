@@ -4,10 +4,7 @@ Visualize tree structure in bash manner using python
 # install
 
 ```bash
-git clone git@github.com:tsupei/treeviz.git
-cd treeviz
-python setup.py sdist
-pip install ./dist/treeviz-1.0.tar.gz
+pip install treeviz
 ```
 
 # Structure
