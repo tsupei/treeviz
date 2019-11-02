@@ -10,6 +10,23 @@ python setup.py sdist
 pip install ./dist/treeviz-1.0.tar.gz
 ```
 
+# Structure
+
+```bash
+.
+├── MANIFEST
+├── MANIFEST.in
+├── README.md
+├── setup.py
+├── test.py
+└── treeviz
+    ├── __init__.py
+    └── treeviz.py
+
+# showcases of usage
+python test.py
+```
+
 # Usage
 
 Create Your tree structure
@@ -114,7 +131,29 @@ Jason is our grandfather
     ├── James
     └── Momo
 ```
-
+(*2019.11.2*) Adding `line_space` parameter to `visualize()`, which enables to set space between each branch
+```bash
+Jason is our grandfather
+├── Mary is Kevin's mother
+│   │
+│   │
+│   ├── Kevin
+│   │   │
+│   │   │
+│   │   └── Baby
+│   │
+│   │
+│   └── Doris
+│
+│
+└── John is Kevin and Doris's father
+    │
+    │
+    ├── James
+    │
+    │
+    └── Momo
+```
 
 
 

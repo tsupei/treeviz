@@ -20,38 +20,52 @@ class Node(object):
 		self.children.append(child)
 		return child
 
-	def __visualize_child(self, value, prefix):
-		return "{prefix}{value}".format(prefix=prefix, value=value)
+	def __pack(self, value, prefix):
+		return "{prefix}{value}".format(prefix="".join(prefix), value=value)
 
-
-	def __dfs(self, descendants, buff, level, prefix, max_len):
+	def __dfs(self, descendants, buff, level, prefix, max_len, line_space):
 		# if descendants is empty, nothing will be excuted
 		for idx, descendant in enumerate(descendants):
+			is_leaf = True if descendant.children else False
 			cur_prefix = prefix[:]
 			if idx != len(descendants)-1:
 				end = len(descendant.value) // max_len + 1
+				# split into multi-lines
 				for i in range(0, end):
 					if i==0:
-						buff.append(self.__visualize_child(descendant.value[i*max_len:(i+1)*max_len], "".join(cur_prefix + ["├── "])))
+						buff.append(self.__pack(descendant.value[i*max_len:(i+1)*max_len], cur_prefix + ["├── "]))
 					else:
-						buff.append(self.__visualize_child(descendant.value[i*max_len:(i+1)*max_len], "".join(cur_prefix + ["│   "])))
+						buff.append(self.__pack(descendant.value[i*max_len:(i+1)*max_len], cur_prefix + ["│   "]))
+				# line space
+				for i in range(0, line_space):
+					if is_leaf:
+						buff.append(self.__pack("│   ", cur_prefix + ["│   "]))
+					else:
+						buff.append(self.__pack("    ", cur_prefix + ["│   "]))
 				cur_prefix.append("│   ")
 			else:
 				end = len(descendant.value) // max_len + 1
+				# split into multi-lines
 				for i in range(0, end):
 					if i==0:
-						buff.append(self.__visualize_child(descendant.value[i*max_len:(i+1)*max_len], "".join(cur_prefix + ["└── "])))
+						buff.append(self.__pack(descendant.value[i*max_len:(i+1)*max_len], cur_prefix + ["└── "]))
 					else:
-						buff.append(self.__visualize_child(descendant.value[i*max_len:(i+1)*max_len], "".join(cur_prefix + ["    "])))
+						buff.append(self.__pack(descendant.value[i*max_len:(i+1)*max_len], cur_prefix + ["    "]))
+				# line space
+				for i in range(0, line_space):
+					if is_leaf:
+						buff.append(self.__pack("│   ", cur_prefix + ["    "]))
+					else:
+						buff.append(self.__pack("    ", cur_prefix + ["    "]))
 				cur_prefix.append("    ")
-			self.__dfs(descendant.children, buff, level+1, cur_prefix, max_len)
+			self.__dfs(descendant.children, buff, level+1, cur_prefix, max_len, line_space)
 
-	def visualize(self, path=None, max_len=10):
+	def visualize(self, path=None, max_len=50, line_space=0):
 		# visualize sub-tree
 		# buffer
 		buff = []
 		buff.append("{}".format(self.value))
-		self.__dfs(self.children, buff, 0, [], max_len)
+		self.__dfs(self.children, buff, 0, [], max_len, line_space)
 
 		if not path or not os.path.exists(path):
 			# Print to terminal
