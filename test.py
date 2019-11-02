@@ -1,7 +1,7 @@
 from treeviz.treeviz import Node
 root = Node("Jason is our grandfather")
 child1 = Node("Mary is Kevin's mother")
-child2 = Node("John is Kevin and Doris's father")
+child2 = Node("John is James and Momo's father")
 grandson1 = Node("Kevin")
 grandson2 = Node("Doris")
 grandson3 = Node("James")

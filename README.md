@@ -96,7 +96,7 @@ root.visualize()
 from treeviz.treeviz import Node
 root = Node("Jason is our grandfather")
 child1 = Node("Mary is Kevin's mother")
-child2 = Node("John is Kevin and Doris's father")
+child2 = Node("John is James and Momo's father")
 grandson1 = Node("Kevin")
 grandson2 = Node("Doris")
 grandson3 = Node("James")
@@ -116,18 +116,18 @@ root.visualize(max_len=10)
 ```bash
 Jason is our grandfather
 ├── Mary is Ke
-│   vin\'s moth
+│   vin's moth
 │   er
 │   ├── Kevin
 │   │   └── Baby
 │   └── Doris
-└── John is Ke
-    vin and Do
-    ris's fath
-    er
+└── John is Ja
+    mes and Mo
+    mo's fathe
+    r
     ├── James
     └── Momo
-```
+ ```
 (*2019.11.2*) Adding `line_space` parameter to `visualize()`, which enables to set space between each branch
 ```python
 root.visualize(line_space=2)
@@ -146,7 +146,7 @@ Jason is our grandfather
 │   └── Doris
 │
 │
-└── John is Kevin and Doris's father
+└── John is James and Momo's father
     │
     │
     ├── James
