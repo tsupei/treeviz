@@ -12,7 +12,7 @@ setup(
   author = 'Chen Tsu Pei',
   author_email = 'a5560648@gmail.com',
   url = 'https://github.com/tsupei/treeviz',
-  download_url="https://github.com/tsupei/treeviz/archive/v1.0.tar.gz",
+  download_url="https://github.com/tsupei/treeviz/archive/v1.1.tar.gz",
   long_description=long_description,
   long_description_content_type="text/markdown",
   keywords = ['tree', 'treeviz'],

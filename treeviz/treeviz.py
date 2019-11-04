@@ -1,4 +1,5 @@
 import os
+import logging
 
 class Node(object):
 	def __init__(self, value):
@@ -68,7 +69,7 @@ class Node(object):
 				cur_prefix.append("    ")
 			self.__dfs(descendant.children, buff, level+1, cur_prefix, max_len, line_space)
 
-	def visualize(self, path=None, max_len=50, line_space=0):
+	def visualize(self, path=None, filename=None, max_len=50, line_space=0):
 		# visualize sub-tree
 		# buffer
 		buff = []
@@ -80,7 +81,18 @@ class Node(object):
 			for buf in buff:
 				print(buf)
 		else:
-			filename = "treeviz.txt"
+			if not filename:
+				filename = "treeviz.txt"
+				logging.info("Default filename: {}".format())
+			filename_components = filename.rsplit(".", 1)
+			if len(filename_components) != 2:
+				filename = "treeviz.txt"
+				logging.warning("filename should be .txt file")
+				logging.info("Default filename: {}".format())
+			if filename_components[1] != 'txt':
+				filename = "treeviz.txt"
+				logging.warning("filename should be .txt file")
+				logging.info("Default filename: {}".format())
 			path_to_file = "{}/{}".format(path, filename)
 			version = 1
 
@@ -88,6 +100,7 @@ class Node(object):
 				new_filename = "{}_{}.{}".format(filename.rsplit(".", 1)[0], version, filename.rsplit(".", 1)[1])
 				path_to_file = "{}/{}".format(path,new_filename)
 				version += 1
+			logging.info("file is saved to {}".format(path_to_file))
 			with open(path_to_file, 'w', encoding="utf-8") as f:
 				for buf in buff:
 					f.write(buf)
